@@ -1,30 +1,29 @@
-use actix_web::{post, web, HttpResponse};
 use crate::services::call::call_multiple_models;
+use actix_web::{Error, HttpResponse, post, web};
 use serde_json::json;
+use tracing::error;
 #[derive(serde::Deserialize)]
 pub struct CallRequest {
     pub models: Vec<String>,
 }
 
 #[post("/call")]
-pub async fn call(req: web::Json<CallRequest>) -> HttpResponse {
-    let models = &req.models;
-    // let chat = call_multiple_models().await;
+pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
     match call_multiple_models().await {
-        Ok(content) => {
-            // Use the content string here
-            HttpResponse::Ok().body(format!("{}",content))
-   
-        }
-        Err(error) => {
-            HttpResponse::InternalServerError()
-            .content_type("application/json")
-            .json(json!({
+        Ok(content) => Ok(HttpResponse::Ok().json(json!({
+            "success": true,
+            "data": content
+        }))),
+        Err(err) => {
+            error!(
+                error = %err,
+                request_models = ?req.models,
+                "Failed to call AI models"
+            );
+            Err(actix_web::error::ErrorInternalServerError(json!({
                 "success": false,
-                "error": error,
-                "message": "Failed to call AI models"
-            }))
+                "message": "Failed to process request"
+            })))
         }
     }
- 
 }

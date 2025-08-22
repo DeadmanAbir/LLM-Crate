@@ -4,8 +4,6 @@ use openrouter_rs::{
     types::Role,
 };
 
-
-
 pub async fn call_multiple_models() -> Result<String, String> {
     let api_key: String = std::env::var("OPENROUTER_API_KEY")
         .map_err(|e| format!("Openrouter API KEY required: {}", e))?;
@@ -27,7 +25,10 @@ pub async fn call_multiple_models() -> Result<String, String> {
         .map_err(|e| format!("Failed to build request: {}", e))?;
 
     // Send request and get response
-    let response = client.send_chat_completion(&request).await.map_err(|e| format!("Failed to send request: {}", e))?;
+    let response = client
+        .send_chat_completion(&request)
+        .await
+        .map_err(|e| format!("Failed to send request: {}", e))?;
     if let Some(content) = response.choices[0].content() {
         Ok(content.to_string())
     } else {
