@@ -9,7 +9,12 @@ pub struct CallRequest {
 
 #[post("/call")]
 pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
-    match call_multiple_models().await {
+    let first_model = req
+        .models
+        .get(0)
+        .ok_or_else(|| actix_web::error::ErrorBadRequest("No models provided"))?;
+
+    match call_multiple_models(first_model.clone()).await {
         Ok(content) => Ok(HttpResponse::Ok().json(json!({
             "success": true,
             "data": content

@@ -4,7 +4,7 @@ use openrouter_rs::{
     types::Role,
 };
 
-pub async fn call_multiple_models() -> Result<String, String> {
+pub async fn call_multiple_models(model: String) -> Result<String, String> {
     let api_key: String = std::env::var("OPENROUTER_API_KEY")
         .map_err(|e| format!("Openrouter API KEY required: {}", e))?;
 
@@ -14,7 +14,7 @@ pub async fn call_multiple_models() -> Result<String, String> {
         .map_err(|e| format!("Failed to build client: {}", e))?;
 
     let request = ChatCompletionRequest::builder()
-        .model("deepseek/deepseek-chat-v3.1")
+        .model(model)
         .messages(vec![
             Message::new(Role::System, "You are a helpful assistant"),
             Message::new(Role::User, "Explain Rust ownership in simple terms"),
