@@ -1,4 +1,4 @@
-use crate::services::call::call_multiple_models;
+use crate::services::call::single_model_call;
 use actix_web::{Error, HttpResponse, post, web};
 use serde_json::json;
 use tracing::error;
@@ -12,7 +12,7 @@ pub struct CallRequest {
 pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
     let CallRequest { model, query } = req.into_inner();
 
-    match call_multiple_models(model, query).await {
+    match single_model_call(model, query).await {
         Ok(content) => Ok(HttpResponse::Ok().json(json!({
             "success": true,
             "data": content

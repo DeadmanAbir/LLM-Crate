@@ -4,7 +4,7 @@ use openrouter_rs::{
     types::Role,
 };
 
-pub async fn call_multiple_models(model: String, query: String) -> Result<String, String> {
+pub async fn single_model_call(model: String, query: String) -> Result<String, String> {
     let api_key: String = std::env::var("OPENROUTER_API_KEY")
         .map_err(|e| format!("Openrouter API KEY required: {}", e))?;
 
