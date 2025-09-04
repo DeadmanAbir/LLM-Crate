@@ -4,17 +4,15 @@ use serde_json::json;
 use tracing::error;
 #[derive(serde::Deserialize)]
 pub struct CallRequest {
-    pub models: Vec<String>,
+    pub model: String,
+    pub query: String,
 }
 
 #[post("/call")]
 pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
-    let first_model = req
-        .models
-        .get(0)
-        .ok_or_else(|| actix_web::error::ErrorBadRequest("No models provided"))?;
+    let CallRequest { model, query } = req.into_inner();
 
-    match call_multiple_models(first_model.clone()).await {
+    match call_multiple_models(model, query).await {
         Ok(content) => Ok(HttpResponse::Ok().json(json!({
             "success": true,
             "data": content
@@ -22,7 +20,6 @@ pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
         Err(err) => {
             error!(
                 error = %err,
-                request_models = ?req.models,
                 "Failed to call AI models"
             );
             Err(actix_web::error::ErrorInternalServerError(json!({

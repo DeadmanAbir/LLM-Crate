@@ -4,9 +4,11 @@ use openrouter_rs::{
     types::Role,
 };
 
-pub async fn call_multiple_models(model: String) -> Result<String, String> {
+pub async fn call_multiple_models(model: String, query: String) -> Result<String, String> {
     let api_key: String = std::env::var("OPENROUTER_API_KEY")
         .map_err(|e| format!("Openrouter API KEY required: {}", e))?;
+
+    println!("{}", api_key);
 
     let client = OpenRouterClient::builder()
         .api_key(api_key)
@@ -17,7 +19,7 @@ pub async fn call_multiple_models(model: String) -> Result<String, String> {
         .model(model)
         .messages(vec![
             Message::new(Role::System, "You are a helpful assistant"),
-            Message::new(Role::User, "Explain Rust ownership in simple terms"),
+            Message::new(Role::User, &query),
         ])
         .temperature(0.7)
         .max_tokens(500)
