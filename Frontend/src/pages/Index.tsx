@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompareModelGrid from "@/components/CompareModelGrid";
 import EnhancedChatInput from "@/components/EnhancedChatInput";
 import ChatMessage from "@/components/ChatMessage";
 import CompareContent from "@/components/CompareContent";
+import ChatInput from "@/components/ChatInput";
 
 interface Message {
 	id: string;
@@ -62,7 +63,7 @@ const Index = () => {
 		{ id: "claude3", name: "Claude 3", accent: "orange-500", enabled: false },
 	]);
 
-	const handleSendMessage = async (messageText: string) => {
+	const handleSendMessage = async (messageText: string, model: string) => {
 		if (activeTab === "chat") {
 			const userMessage: Message = {
 				id: Date.now().toString(),
@@ -70,6 +71,8 @@ const Index = () => {
 				isUser: true,
 				timestamp: new Date(),
 			};
+
+			console.log("userMessage", userMessage, model);
 
 			setMessages((prev) => [...prev, userMessage]);
 			setIsLoading(true);
@@ -152,7 +155,7 @@ const Index = () => {
 	};
 
 	const hasMessages = messages.length > 0;
-	const hasCompareMessages = compareMessages.length > 0;
+
 	const hasActiveModels = selectedModels.some((model) => model.enabled);
 
 	return (
@@ -193,7 +196,8 @@ const Index = () => {
 						</div>
 
 						{/* Chat Input */}
-						<EnhancedChatInput onSendMessage={handleSendMessage} mode="chat" />
+						<ChatInput onSendMessage={handleSendMessage} />
+						{/* <EnhancedChatInput onSendMessage={handleSendMessage} mode="chat" /> */}
 					</>
 				) : (
 					<>

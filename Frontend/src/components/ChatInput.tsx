@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import ModelSelector from "./ModelSelector";
 
 interface ChatInputProps {
-	onSendMessage: (message: string) => void;
+	onSendMessage: (message: string, model: string) => void;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
@@ -16,7 +16,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (message.trim()) {
-			onSendMessage(message.trim());
+			onSendMessage(message.trim(), selectedModel);
 			setMessage("");
 		}
 	};

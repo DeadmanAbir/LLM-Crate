@@ -38,44 +38,44 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
 
 	const models: Model[] = [
 		{
-			name: "gemini-2.5-flash",
+			name: "google/gemini-2.5-flash",
 			label: "Gemini 2.5 Flash",
 			icon: <Diamond className="h-4 w-4" />,
 			available: true,
 			selected: selectedModel === "gemini-2.5-flash",
 		},
 		{
-			name: "gemini-2.5-flash-lite",
+			name: "google/gemini-2.5-flash-lite",
 			label: "Gemini 2.5 Flash Lite",
 			icon: <Zap className="h-4 w-4" />,
 			available: true,
 		},
 		{
-			name: "gemini-2.5-flash-image",
+			name: "google/gemini-2.5-flash-image",
 			label: "Gemini 2.5 Flash Image",
 			icon: <Diamond className="h-4 w-4 opacity-50" />,
-			available: false,
+			available: true,
 			premium: true,
 		},
 		{
-			name: "gemini-2.5-pro",
+			name: "google/gemini-2.5-pro",
 			label: "Gemini 2.5 Pro",
 			icon: <Star className="h-4 w-4 opacity-50" />,
-			available: false,
+			available: true,
 			premium: true,
 		},
 		{
-			name: "claude-3.5-sonnet",
+			name: "anthropic/claude-3.5-sonnet",
 			label: "Claude 3.5 Sonnet",
 			icon: <Star className="h-4 w-4 opacity-50" />,
-			available: false,
+			available: true,
 			premium: true,
 		},
 		{
-			name: "gpt-4o",
+			name: "openai/gpt-4o",
 			label: "GPT-4o",
 			icon: <Star className="h-4 w-4 opacity-50" />,
-			available: false,
+			available: true,
 			premium: true,
 		},
 	];
@@ -112,7 +112,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
 				</div>
 
 				{/* Upgrade Banner */}
-				<div className="p-4 bg-gradient-primary/10 border-b border-border-glass">
+				{/* <div className="p-4 bg-gradient-primary/10 border-b border-border-glass">
 					<div className="flex items-center justify-between">
 						<div>
 							<p className="text-sm font-medium text-foreground">
@@ -129,7 +129,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
 							Upgrade now
 						</Button>
 					</div>
-				</div>
+				</div> */}
 
 				{/* Models List */}
 				<div className="max-h-80 overflow-y-auto">

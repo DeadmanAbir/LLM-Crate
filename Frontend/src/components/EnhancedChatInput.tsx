@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Search, Paperclip, Send, Image } from "lucide-react";
 
 interface EnhancedChatInputProps {
-	onSendMessage: (message: string) => void;
+	onSendMessage: (message: string, model: string) => void;
 	mode: "chat" | "compare";
 }
 
@@ -17,7 +17,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (message.trim()) {
-			onSendMessage(message.trim());
+			onSendMessage(message.trim(), "demo-model");
 			setMessage("");
 		}
 	};
