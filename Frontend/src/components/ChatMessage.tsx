@@ -1,4 +1,6 @@
 import React from "react";
+import Markdown from "react-markdown";
+import { withMdx } from "react-markdown-with-mdx";
 
 interface ChatMessageProps {
 	message: string;
@@ -21,6 +23,8 @@ const TypingIndicator = () => {
 	);
 };
 
+const MarkdownWithMdx = withMdx(Markdown);
+
 const ChatMessage: React.FC<ChatMessageProps> = ({
 	message,
 	isUser,
@@ -31,9 +35,10 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 			<div className="flex justify-end px-6 py-3">
 				<div className="max-w-3xl">
 					<div className="bg-primary/10 rounded-2xl px-4 py-3 border border-primary/20">
-						<p className="text-foreground text-sm whitespace-pre-wrap">
+						{/* <p className="text-foreground text-sm whitespace-pre-wrap">
 							{message}
-						</p>
+						</p> */}
+						<MarkdownWithMdx>{message}</MarkdownWithMdx>
 					</div>
 				</div>
 			</div>

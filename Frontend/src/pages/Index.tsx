@@ -69,6 +69,8 @@ const Index = () => {
 		{ id: "claude3", name: "Claude 3", accent: "orange-500", enabled: false },
 	]);
 
+	const [message, setMessage] = useState("");
+
 	const handleSendMessage = async (messageText: string, model: string) => {
 		if (activeTab === "chat") {
 			const userMessage: Message = {
@@ -201,12 +203,16 @@ const Index = () => {
 									)}
 								</div>
 							) : (
-								<WelcomeScreen />
+								<WelcomeScreen setMessage={setMessage} />
 							)}
 						</div>
 
 						{/* Chat Input */}
-						<ChatInput onSendMessage={handleSendMessage} />
+						<ChatInput
+							onSendMessage={handleSendMessage}
+							message={message}
+							setMessage={setMessage}
+						/>
 						{/* <EnhancedChatInput onSendMessage={handleSendMessage} mode="chat" /> */}
 					</>
 				) : (

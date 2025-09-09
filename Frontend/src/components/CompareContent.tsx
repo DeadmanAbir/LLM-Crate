@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import CompareChat from "./CompareChat";
 
@@ -39,7 +38,7 @@ const CompareContent: React.FC<CompareContentProps> = ({
 	return (
 		<div className="flex-1 flex flex-col">
 			{/* Upgrade Button */}
-			<div className="absolute top-6 right-6 z-10">
+			{/* <div className="absolute top-6 right-6 z-10">
 				<Button
 					variant="secondary"
 					className="bg-background text-foreground border border-border-glass hover:bg-secondary/50"
@@ -47,7 +46,7 @@ const CompareContent: React.FC<CompareContentProps> = ({
 					<Sparkles className="h-4 w-4 mr-2" />
 					Upgrade to unlock
 				</Button>
-			</div>
+			</div> */}
 
 			{/* Main Content Area */}
 			{!hasActiveModels ? (

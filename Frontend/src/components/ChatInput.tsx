@@ -6,10 +6,15 @@ import ModelSelector from "./ModelSelector";
 
 interface ChatInputProps {
 	onSendMessage: (message: string, model: string) => void;
+	message: string;
+	setMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
-	const [message, setMessage] = useState("");
+const ChatInput: React.FC<ChatInputProps> = ({
+	onSendMessage,
+	message,
+	setMessage,
+}) => {
 	const [isModelSelectorOpen, setIsModelSelectorOpen] = useState(false);
 	const [selectedModel, setSelectedModel] = useState("gemini-2.5-flash");
 

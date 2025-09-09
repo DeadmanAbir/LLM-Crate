@@ -1,16 +1,13 @@
 import React from "react";
-import {
-	Search,
-	Plus,
-	MessageSquare,
-	Settings,
-	Moon,
-	ChevronLeft,
-	Menu,
-	User,
-} from "lucide-react";
+import { Search, Plus, MessageSquare, ChevronLeft, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "./ui/tooltip";
 
 interface SidebarProps {
 	isCollapsed: boolean;
@@ -37,12 +34,12 @@ const Sidebar: React.FC<SidebarProps> = ({
 					<div className="flex items-center justify-between mb-4">
 						<h1 className="text-xl font-semibold text-foreground">LLM Crate</h1>
 						<div className="flex items-center gap-2">
-							<Button variant="ghost" size="sm" className="p-2">
+							{/* <Button variant="ghost" size="sm" className="p-2">
 								<Settings className="h-4 w-4" />
 							</Button>
 							<Button variant="ghost" size="sm" className="p-2">
 								<Moon className="h-4 w-4" />
-							</Button>
+							</Button> */}
 							<Button
 								variant="ghost"
 								size="sm"
@@ -79,16 +76,26 @@ const Sidebar: React.FC<SidebarProps> = ({
 						>
 							Chat
 						</button>
-						<button
-							onClick={() => onTabChange("compare")}
-							className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-								activeTab === "compare"
-									? "bg-primary text-primary-foreground"
-									: "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-							}`}
-						>
-							Compare
-						</button>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<button
+										disabled
+										onClick={() => onTabChange("compare")}
+										className={`flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 cursor-not-allowed ${
+											activeTab === "compare"
+												? "bg-primary text-primary-foreground"
+												: "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+										}`}
+									>
+										Compare
+									</button>
+								</TooltipTrigger>
+								<TooltipContent>
+									<p>Compare chat coming soon...</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</div>
 				)}
 
@@ -160,7 +167,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 			</div>
 
 			{/* Login Button */}
-			<div className="p-4 border-t border-border-glass">
+			{/* <div className="p-4 border-t border-border-glass">
 				{!isCollapsed ? (
 					<Button
 						variant="outline"
@@ -177,7 +184,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 						<User className="h-4 w-4" />
 					</Button>
 				)}
-			</div>
+			</div> */}
 		</div>
 	);
 };
