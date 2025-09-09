@@ -6,6 +6,7 @@ import EnhancedChatInput from "@/components/EnhancedChatInput";
 import ChatMessage from "@/components/ChatMessage";
 import CompareContent from "@/components/CompareContent";
 import ChatInput from "@/components/ChatInput";
+import { callAPI } from "@/utils/api";
 
 interface Message {
 	id: string;
@@ -25,6 +26,11 @@ interface CompareMessage {
 			isLoading: boolean;
 		};
 	};
+}
+
+interface CallResponse {
+	data: string;
+	success: boolean;
 }
 
 const Index = () => {
@@ -77,17 +83,21 @@ const Index = () => {
 			setMessages((prev) => [...prev, userMessage]);
 			setIsLoading(true);
 
-			// Simulate AI response
-			setTimeout(() => {
-				const aiMessage: Message = {
-					id: (Date.now() + 1).toString(),
-					text: "I'm an AI assistant created by Lovable. I can help you with a variety of tasks including answering questions, providing information, and assisting with problem-solving. How can I help you today?",
-					isUser: false,
-					timestamp: new Date(),
-				};
-				setMessages((prev) => [...prev, aiMessage]);
-				setIsLoading(false);
-			}, 2000);
+			const response = await callAPI<CallResponse>({
+				model: model,
+				query: messageText,
+			});
+
+			console.log("backend reponse : ", response);
+
+			const aiMessage: Message = {
+				id: (Date.now() + 1).toString(),
+				text: response.result?.data!,
+				isUser: false,
+				timestamp: new Date(),
+			};
+			setMessages((prev) => [...prev, aiMessage]);
+			setIsLoading(false);
 		} else {
 			// Compare mode
 			const userMessage: CompareMessage = {
