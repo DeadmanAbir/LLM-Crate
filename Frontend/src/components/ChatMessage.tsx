@@ -35,10 +35,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 			<div className="flex justify-end px-6 py-3">
 				<div className="max-w-3xl">
 					<div className="bg-primary/10 rounded-2xl px-4 py-3 border border-primary/20">
-						{/* <p className="text-foreground text-sm whitespace-pre-wrap">
+						<p className="text-foreground text-sm whitespace-pre-wrap">
 							{message}
-						</p> */}
-						<MarkdownWithMdx>{message}</MarkdownWithMdx>
+						</p>
 					</div>
 				</div>
 			</div>
@@ -53,7 +52,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 				) : (
 					<div className="prose prose-sm max-w-none text-foreground">
 						<div className="text-foreground leading-relaxed whitespace-pre-wrap text-sm">
-							{message}
+							{/* {message} */}
+							<MarkdownWithMdx>{message}</MarkdownWithMdx>
 						</div>
 					</div>
 				)}
