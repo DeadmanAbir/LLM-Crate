@@ -15,12 +15,12 @@ pub async fn call(req: web::Json<CallRequest>) -> Result<HttpResponse, Error> {
 
     let config = OpenRouterConfig::default();
 
-    if !config.models.is_enabled(&model) {
-        return Err(actix_web::error::ErrorBadRequest(format!(
-            "Model '{}' is not available",
-            model
-        )));
-    }
+    // if !config.models.is_enabled(&model) {
+    //     return Err(actix_web::error::ErrorBadRequest(format!(
+    //         "Model '{}' is not available",
+    //         model
+    //     )));
+    // }
 
     match single_model_call(model, query).await {
         Ok(content) => Ok(HttpResponse::Ok().json(json!({

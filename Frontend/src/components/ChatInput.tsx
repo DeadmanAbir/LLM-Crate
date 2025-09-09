@@ -96,7 +96,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage }) => {
 
 						{/* Footer Text */}
 						<p className="text-xs text-muted-foreground text-center opacity-60">
-							T3.chat can make mistakes. Consider checking important
+							LLM Crate can make mistakes. Consider checking important
 							information.
 						</p>
 					</form>

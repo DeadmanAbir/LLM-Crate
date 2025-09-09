@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 			<div className="p-4 border-b border-border-glass">
 				{!isCollapsed ? (
 					<div className="flex items-center justify-between mb-4">
-						<h1 className="text-xl font-semibold text-foreground">T3.chat</h1>
+						<h1 className="text-xl font-semibold text-foreground">LLM Crate</h1>
 						<div className="flex items-center gap-2">
 							<Button variant="ghost" size="sm" className="p-2">
 								<Settings className="h-4 w-4" />

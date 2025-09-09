@@ -23,7 +23,7 @@ const EnhancedChatInput: React.FC<EnhancedChatInputProps> = ({
 	};
 
 	const placeholder =
-		mode === "compare" ? "Ask me anything..." : "Message T3.chat...";
+		mode === "compare" ? "Ask me anything..." : "Message LLM Crate...";
 
 	return (
 		<div className="border-t border-border-glass bg-background/50 backdrop-blur-sm">
