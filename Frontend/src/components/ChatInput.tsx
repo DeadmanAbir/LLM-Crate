@@ -16,7 +16,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 	setMessage,
 }) => {
 	const [isModelSelectorOpen, setIsModelSelectorOpen] = useState(false);
-	const [selectedModel, setSelectedModel] = useState("gemini-2.5-flash");
+	const [selectedModel, setSelectedModel] = useState("google/gemini-2.5-flash");
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
