@@ -91,13 +91,23 @@ const Index = () => {
 			});
 
 			console.log("backend reponse : ", response);
+			let aiMessage: Message;
+			if (!response.result?.success) {
+				aiMessage = {
+					id: (Date.now() + 1).toString(),
+					text: "Oops there's some internal server error, check your model selection or contact the support team.",
+					isUser: false,
+					timestamp: new Date(),
+				};
+			} else {
+				aiMessage = {
+					id: (Date.now() + 1).toString(),
+					text: response.result?.data!,
+					isUser: false,
+					timestamp: new Date(),
+				};
+			}
 
-			const aiMessage: Message = {
-				id: (Date.now() + 1).toString(),
-				text: response.result?.data!,
-				isUser: false,
-				timestamp: new Date(),
-			};
 			setMessages((prev) => [...prev, aiMessage]);
 			setIsLoading(false);
 		} else {
