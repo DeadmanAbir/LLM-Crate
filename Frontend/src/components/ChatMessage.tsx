@@ -35,7 +35,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 			<div className="flex justify-end px-6 py-3">
 				<div className="max-w-3xl">
 					<div className="bg-primary/10 rounded-2xl px-4 py-3 border border-primary/20">
-						<p className="text-foreground text-sm whitespace-pre-wrap">
+						<p className="text-foreground text-sm whitespace-pre-wrap break-words">
 							{message}
 						</p>
 					</div>
@@ -50,10 +50,27 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 				{isLoading ? (
 					<TypingIndicator />
 				) : (
-					<div className="prose prose-sm max-w-none text-foreground">
-						<div className="text-foreground leading-relaxed whitespace-pre-wrap text-sm">
-							{/* {message} */}
-							<MarkdownWithMdx>{message}</MarkdownWithMdx>
+					<div className="prose prose-sm max-w-none text-foreground break-words overflow-hidden">
+						<div className="text-foreground leading-relaxed text-sm whitespace-pre-wrap overflow-wrap-anywhere break-words">
+							<MarkdownWithMdx
+							// components={{
+							// 	pre: ({ children, ...props }) => (
+							// 		<pre
+							// 			{...props}
+							// 			className="whitespace-pre-wrap break-all overflow-x-auto bg-gray-100 p-3 rounded text-xs max-w-full"
+							// 		>
+							// 			{children}
+							// 		</pre>
+							// 	),
+							// 	code: ({ children, ...props }) => (
+							// 		<code {...props} className="break-all whitespace-pre-wrap">
+							// 			{children}
+							// 		</code>
+							// 	),
+							// }}
+							>
+								{message}
+							</MarkdownWithMdx>
 						</div>
 					</div>
 				)}

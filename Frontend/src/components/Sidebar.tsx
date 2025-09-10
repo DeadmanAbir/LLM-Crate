@@ -103,7 +103,12 @@ const Sidebar: React.FC<SidebarProps> = ({
 				{activeTab === "chat" && (
 					<>
 						{!isCollapsed ? (
-							<Button className="w-full bg-gradient-primary hover:opacity-90 transition-opacity">
+							<Button
+								onClick={() => {
+									window.location.reload();
+								}}
+								className="w-full bg-gradient-primary hover:opacity-90 transition-opacity"
+							>
 								<Plus className="h-4 w-4 mr-2" />
 								New Chat
 							</Button>
@@ -123,7 +128,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 			{!isCollapsed && activeTab === "chat" && (
 				<div className="p-4 border-b border-border-glass">
 					<div className="relative">
-						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+						<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 bg-violet-500" />
 						<Input
 							placeholder="Search threads..."
 							className="pl-10 chat-input"
