@@ -18,11 +18,12 @@ pub async fn single_model_call(model: String, query: String) -> Result<String, S
     let request = ChatCompletionRequest::builder()
         .model(model)
         .messages(vec![
-            Message::new(Role::System, "You are a helpful assistant"),
+            Message::new(
+                Role::System,
+                "You are a helpful assistant. Provide output in a proper MDX format",
+            ),
             Message::new(Role::User, &query),
         ])
-        .temperature(0.7)
-        .max_tokens(500)
         .build()
         .map_err(|e| format!("Failed to build request: {}", e))?;
 
