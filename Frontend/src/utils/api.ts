@@ -30,6 +30,13 @@ export async function callAPI<T = unknown>(
 		});
 
 		if (!response.ok) {
+			return {
+				ok: false,
+				result: {
+					success: false,
+				} as T,
+			};
+
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 
