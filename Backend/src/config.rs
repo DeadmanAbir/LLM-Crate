@@ -9,7 +9,7 @@ pub struct Config {
 pub fn get_config() -> Config {
     dotenvy::dotenv().ok();
     Config {
-        host: std::env::var("HOST").unwrap_or("127.0.0.1".into()),
+        host: std::env::var("HOST").unwrap_or("0.0.0.0".into()),
         port: std::env::var("PORT")
             .unwrap_or("8000".into())
             .parse()
